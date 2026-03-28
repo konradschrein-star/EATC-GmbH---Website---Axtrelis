@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EATC GmbH - Website-Entwürfe | Axtrelis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --accent: #a8d8ff;
+            --accent-dim: #a8d8ff33;
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+            --orange: #f97316;
+            --gold: #c5a059;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Subtle animated bg */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse 600px 400px at 20% 20%, rgba(168,216,255,0.04), transparent),
+                radial-gradient(ellipse 500px 500px at 80% 80%, rgba(249,115,22,0.03), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 48px 0 0;
+            text-align: center;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo span {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+
+        .logo .accent {
+            color: var(--accent);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(168,216,255,0.15);
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 32px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 40px 0 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero .subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.45);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* Expired Website Alert */
+        .alert-box {
+            background: rgba(249,115,22,0.06);
+            border: 1px solid rgba(249,115,22,0.2);
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            text-align: left;
+        }
+
+        .alert-box .alert-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .alert-box .alert-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(249,115,22,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .alert-box .alert-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--orange);
+        }
+
+        .alert-box .alert-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .alert-box p {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .alert-box .expired-url {
+            display: inline-block;
+            color: rgba(255,255,255,0.3);
+            text-decoration: line-through;
+            font-family: monospace;
+            font-size: 13px;
+            background: rgba(255,255,255,0.04);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Strategy Section */
+        .strategy {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 48px;
+        }
+
+        .strategy h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .strategy p {
+            color: rgba(255,255,255,0.55);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .strategy-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .strategy-card .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .strategy-card .card-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .strategy-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .strategy-card p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .icon-raumkunst .card-icon {
+            background: rgba(197,160,89,0.15);
+            color: var(--gold);
+        }
+
+        .icon-business .card-icon {
+            background: rgba(249,115,22,0.15);
+            color: var(--orange);
+        }
+
+        /* Versions */
+        .versions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .version-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            color: var(--white);
+            display: block;
+        }
+
+        .version-card:hover {
+            border-color: rgba(168,216,255,0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(168,216,255,0.08);
+        }
+
+        .version-card .preview {
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .version-card .preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .version-card:hover .preview img {
+            transform: scale(1.05);
+        }
+
+        .version-card .preview .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .version-card .preview .overlay .tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 100px;
+            backdrop-filter: blur(12px);
+        }
+
+        .v1-tag { background: rgba(197,160,89,0.3); color: #c5a059; border: 1px solid rgba(197,160,89,0.3); }
+        .v2-tag { background: rgba(249,115,22,0.3); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
+
+        .version-card .info {
+            padding: 24px;
+        }
+
+        .version-card .info h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .version-card .info .desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .version-card .info .tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .version-card .info .tech span {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .version-card .info .cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 16px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .version-card .info .cta svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s;
+        }
+
+        .version-card:hover .info .cta svg {
+            transform: translateX(4px);
+        }
+
+        /* Services CTA */
+        .services-cta {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(168,216,255,0.08), rgba(168,216,255,0.02));
+            border: 1px solid rgba(168,216,255,0.15);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s;
+            margin-bottom: 48px;
+        }
+
+        .services-cta:hover {
+            border-color: rgba(168,216,255,0.35);
+            background: linear-gradient(135deg, rgba(168,216,255,0.12), rgba(168,216,255,0.04));
+        }
+
+        .services-cta h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .services-cta p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.45);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .services-cta .arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 16px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .contact h3 {
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 16px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+        }
+
+        .contact-item svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px 0 48px;
+            color: rgba(255,255,255,0.2);
+            font-size: 12px;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .versions { grid-template-columns: 1fr; }
+            .strategy-grid { grid-template-columns: 1fr; }
+            .contact-info { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="white"/><path d="M8 10h16M8 16h12M8 22h14" stroke="black" stroke-width="2.5" stroke-linecap="round"/></svg>
+                <span>axtrelis<span class="accent">.</span></span>
+            </div>
+            <br>
+            <span class="badge">Website-Entwürfe für EATC GmbH</span>
+        </header>
+
+        <section class="hero">
+            <h1>Zwei Geschäfte.<br><span class="highlight">Zwei Websites.</span></h1>
+            <p class="subtitle">
+                Herr [Name] brennt für seine Projekte und ist ein vielbeschäftigter Mann.
+                Genau deshalb haben wir direkt weitergedacht und das Ganze in zwei klare
+                Website-Richtungen aufgeteilt.
+            </p>
+        </section>
+
+        <!-- Expired Website Alert -->
+        <div class="alert-box">
+            <div class="alert-header">
+                <div class="alert-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <span class="alert-title">Aktuelle Website nicht erreichbar</span>
+            </div>
+            <p>
+                Die Domain <span class="expired-url">eatc-gmbh-group.com</span> ist aktuell abgelaufen und zeigt nur eine Parking-Seite.
+                Das unterstreicht den dringenden Bedarf einer professionellen, zuverlässigen Webpräsenz.
+                Wir haben deshalb beide Websites komplett neu aufgebaut, mit modernem Design, sauberem Code und sofort einsatzbereit.
+            </p>
+        </div>
+
+        <!-- Strategy -->
+        <div class="strategy">
+            <h2>Unsere Strategie: Klare Trennung, maximale Wirkung</h2>
+            <p>
+                Statt alles auf eine Seite zu packen, trennen wir die Geschäftsbereiche in zwei spezialisierte
+                Webauftritte. Jede Seite spricht ihre Zielgruppe direkt an, mit passendem Design, passender Sprache
+                und passender Struktur.
+            </p>
+            <div class="strategy-grid">
+                <div class="strategy-card icon-raumkunst">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3>Raumkunst Welt</h3>
+                    <p>Trockenbau, Innenausbau, Deckenlösungen, Wandgestaltung. Visuelle Stärke für Dresdner Kunden die einen Handwerksbetrieb suchen.</p>
+                </div>
+                <div class="strategy-card icon-business">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                    </div>
+                    <h3>EATC International</h3>
+                    <p>Training, Sprache, Dolmetschen, Business Development, IT, Handel. Zweisprachig (DE/EN) für internationale Geschäftspartner.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Versions -->
+        <div class="versions">
+            <a href="./v1/" class="version-card">
+                <div class="preview">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800" alt="Raumkunst Welt Preview" referrerpolicy="no-referrer">
+                    <div class="overlay">
+                        <span class="tag v1-tag">Raumkunst Welt</span>
+                    </div>
+                </div>
+                <div class="info">
+                    <h3>Raumkunst Welt</h3>
+                    <div class="desc">Trockenbau & Innenausbau Dresden. Champagner-Gold Design mit edlem Look. Fokus auf Handwerksqualität und lokale Kunden in Dresden.</div>
+                    <div class="tech">
+                        <span>React</span>
+                        <span>Tailwind</span>
+                        <span>Motion</span>
+                        <span>Lucide</span>
+                    </div>
+                    <div class="cta">
+                        Website ansehen
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </div>
+            </a>
+
+            <a href="./v2/" class="version-card">
+                <div class="preview">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" alt="EATC International Preview" referrerpolicy="no-referrer">
+                    <div class="overlay">
+                        <span class="tag v2-tag">EATC International</span>
+                    </div>
+                </div>
+                <div class="info">
+                    <h3>EATC GmbH International</h3>
+                    <div class="desc">Schulungen, Sprache, Dolmetschen, Delegationen, Business Development, IT & Handel. Zweisprachig DE/EN mit Blog & Mock-Shop.</div>
+                    <div class="tech">
+                        <span>React</span>
+                        <span>Tailwind</span>
+                        <span>Motion</span>
+                        <span>DE/EN</span>
+                    </div>
+                    <div class="cta">
+                        Website ansehen
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Services CTA -->
+        <a href="https://www.axtrelis.com/leistungen" class="services-cta" target="_blank" rel="noopener noreferrer">
+            <h3>Mehr als nur Websites</h3>
+            <p>Social Media Management, KI-Lösungen, Automatisierung, digitale Prozesse und vieles mehr. Von der soliden Webpräsenz bis hin zu individuellen Business-Lösungen.</p>
+            <div class="arrow">
+                Alle Leistungen entdecken
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+        </a>
+
+        <!-- Contact -->
+        <div class="contact">
+            <h3>Ihr Ansprechpartner</h3>
+            <div class="contact-info">
+                <a href="tel:+4917670753735" class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    Konrad Schreiner
+                </a>
+                <a href="mailto:konrad@axtrelis.com" class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    konrad@axtrelis.com
+                </a>
+                <span class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Dresden, Sachsen
+                </span>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 <a href="https://www.axtrelis.com" target="_blank" rel="noopener noreferrer">Axtrelis</a>.
+            Website-Entwürfe für EATC GmbH, Dresden.
+        </footer>
+    </div>
+</body>
+</html>
